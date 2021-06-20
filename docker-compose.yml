@@ -1,0 +1,28 @@
+version: '3'
+
+services:
+
+  rabbitmq:
+    container_name: rabbit-mq
+    image: rabbitmq:3-management-alpine
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+    networks:
+      - delibird-network
+    environment:
+      RABBITMQ_DEFAULT_USER: rabbitmqUser
+      RABBITMQ_DEFAULT_PASS: rabbitmqPass
+
+  delibird:
+    image: renanfch/delibird
+    container_name: delibird
+    restart: always
+    ports:
+      - 8080:8080
+    networks:
+      - delibird-network
+
+networks:
+  delibird-network:
+    driver: bridge

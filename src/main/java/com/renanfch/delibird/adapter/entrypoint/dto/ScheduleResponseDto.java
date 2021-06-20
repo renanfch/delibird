@@ -10,6 +10,6 @@ import java.time.LocalDateTime;
 public class ScheduleResponseDto {
     private final LocalDateTime sendTime;
     private final String recipient;
-    private final int messageService;
+    private final String messageService;
     private final String message;
 }

@@ -3,8 +3,6 @@ package com.renanfch.delibird.adapter.entrypoint.dto;
 import lombok.Builder;
 import lombok.Getter;
 
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
@@ -16,9 +14,8 @@ public class CreateScheduleDto {
     private final LocalDateTime sendTime;
     @NotBlank
     private final String recipient;
-    @Min(1)
-    @Max(4)
-    private final int messageService;
+    @NotBlank
+    private final String messageService;
     @NotBlank
     private final String message;
 }

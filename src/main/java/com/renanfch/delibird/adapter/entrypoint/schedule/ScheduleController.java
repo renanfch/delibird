@@ -3,20 +3,15 @@ package com.renanfch.delibird.adapter.entrypoint.schedule;
 import com.renanfch.delibird.adapter.entrypoint.dto.ScheduleResponseDto;
 import com.renanfch.delibird.adapter.entrypoint.mapper.ScheduleMapper;
 import com.renanfch.delibird.adapter.entrypoint.dto.CreateScheduleDto;
-import com.renanfch.delibird.adapter.entrypoint.dto.SearchScheduleDto;
-import com.renanfch.delibird.adapter.entrypoint.mapper.SearchScheduleMapper;
 import com.renanfch.delibird.core.usecase.RemoveScheduleUseCase;
 import com.renanfch.delibird.core.usecase.ScheduleMessageUseCase;
 import com.renanfch.delibird.core.usecase.SearchScheduleUseCase;
 import io.swagger.annotations.Api;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.stream.Collectors;
 
 @RestController
 @Api(
@@ -43,25 +38,11 @@ public class ScheduleController {
 
     @GetMapping("/{id}")
     public ResponseEntity<ScheduleResponseDto> searchById(@PathVariable final int id)  {
-        final var scheduledMessage = searchScheduleUseCase.getById(id);
+        final var scheduledMessage = searchScheduleUseCase.getSheduleMessageById(id);
         final var scheduleResponseDto = ScheduleMapper.toDtoResponse(scheduledMessage);
 
         return ResponseEntity.ok()
                 .body(scheduleResponseDto);
-    }
-
-    @GetMapping
-    public ResponseEntity<Page<ScheduleResponseDto>> search(final SearchScheduleDto searchScheduleDto) {
-        final var searchSchedule = SearchScheduleMapper.toEntity(searchScheduleDto);
-        final var scheduledsMessage = searchScheduleUseCase.getPage(searchSchedule);
-        final var scheduledsResponseDto = scheduledsMessage.get()
-                .map(ScheduleMapper::toDtoResponse)
-                .collect(Collectors.toList());
-
-        final var scheduledsPage = new PageImpl<>(scheduledsResponseDto, scheduledsMessage.getPageable(),scheduledsMessage.getTotalElements());
-
-        return ResponseEntity.ok()
-                .body(scheduledsPage);
     }
 
     @DeleteMapping("/{id}")

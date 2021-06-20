@@ -1,6 +1,7 @@
 package com.renanfch.delibird.core.usecase;
 
-import com.renanfch.delibird.core.enums.ScheduleStatusEnum;
+import com.renanfch.delibird.core.exception.ScheduleNotFoundException;
+import com.renanfch.delibird.core.vo.ScheduleStatusEnum;
 import com.renanfch.delibird.core.exception.ScheduleStateException;
 import com.renanfch.delibird.core.port.ScheduleRepository;
 import lombok.RequiredArgsConstructor;
@@ -11,10 +12,11 @@ import org.springframework.stereotype.Service;
 public class RemoveScheduleUseCase {
 
     private final ScheduleRepository scheduleRepository;
-    private final SearchScheduleUseCase searchScheduleUseCase;
 
-    public void cancel(int id) {
-        final var schedule = searchScheduleUseCase.getById(id);
+    public void cancel(final int id) {
+        final var schedule = scheduleRepository.findById(id)
+                .orElseThrow(()->new ScheduleNotFoundException(id));
+
         if(schedule.getScheduleStatusEnum() == ScheduleStatusEnum.CANCELED || schedule.getScheduleStatusEnum() == ScheduleStatusEnum.SENT)
             throw new ScheduleStateException(schedule);
 
