@@ -1,7 +1,7 @@
 FROM openjdk:11-jdk-slim
 RUN mkdir data
 VOLUME data
-COPY build/delibird.jar delibird.jar
+COPY target/delibird*.jar delibird.jar
 
 ENV DATABASE_URL jdbc:h2:nio:./data/delibird_db;MODE=MySQL
 ENV DATABASE_USER root
