@@ -6,8 +6,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class DelibirdApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(DelibirdApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(DelibirdApplication.class, args);
+    }
 
 }

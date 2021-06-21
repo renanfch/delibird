@@ -19,15 +19,14 @@ public enum MessageServiceEnum {
         this.fun = fun;
     }
 
-    public void validade(final String recipient)
-    {
+    public void validade(final String recipient) {
         fun.accept(recipient);
     }
 
-    public static MessageServiceEnum from(final String value){
+    public static MessageServiceEnum from(final String value) {
         return Arrays.stream(MessageServiceEnum.values())
-                .filter(it-> it.toString().equals(value))
+                .filter(it -> it.toString().equals(value))
                 .findFirst()
-                .orElseThrow(()->new MessageServiceNotFoundException(value));
+                .orElseThrow(() -> new MessageServiceNotFoundException(value));
     }
 }

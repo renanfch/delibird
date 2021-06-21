@@ -8,9 +8,10 @@ import com.renanfch.delibird.core.vo.MessageServiceEnum;
 import com.renanfch.delibird.core.vo.Recipient;
 
 public class ScheduleMapper {
-    private ScheduleMapper(){}
+    private ScheduleMapper() {
+    }
 
-    public static CreateSchedule toEntity(final CreateScheduleDto scheduleRegisterDto){
+    public static CreateSchedule toEntity(final CreateScheduleDto scheduleRegisterDto) {
         final var msgService = MessageServiceEnum.from(scheduleRegisterDto.getMessageService());
         final var recipient = Recipient.from(scheduleRegisterDto.getRecipient(), msgService);
 
@@ -24,10 +25,12 @@ public class ScheduleMapper {
 
     public static ScheduleResponseDto toDtoResponse(final ScheduleMessage scheduleMessage) {
         return ScheduleResponseDto.builder()
+                .id(scheduleMessage.getId())
                 .sendTime(scheduleMessage.getSendTime())
                 .recipient(scheduleMessage.getRecipient().getValue())
                 .messageService(scheduleMessage.getMessageService().toString())
                 .message(scheduleMessage.getMessage())
+                .scheduleStatusEnum(scheduleMessage.getScheduleStatusEnum().toString())
                 .build();
     }
 }

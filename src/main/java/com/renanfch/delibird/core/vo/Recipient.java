@@ -6,7 +6,7 @@ import lombok.Getter;
 public class Recipient {
     private final String value;
 
-    private Recipient(final String value){
+    private Recipient(final String value) {
         this.value = value;
     }
 

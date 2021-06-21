@@ -34,6 +34,56 @@ A estrutura do projeto foi desenvolvido pensando no conceito do
 
 ## Documentação
 
+**Registrar agendamento de mensagem**
+
+POST http://localhost:9000/schedule
+
+Body
+
+```json
+{
+  "message":"mensagem de envio",
+  "messageService":"EMAIL",
+  "recipient":"abcd@gmail.com",
+  "sendTime":"2021-06-21T10:19"
+}
+```
+
+Retorno:
+
+```json
+{
+  "id": 1,
+  "sendTime": "2021-06-21T10:19:00",
+  "recipient": "abcd@gmail.com",
+  "messageService": "EMAIL",
+  "message": "mensagem de envio",
+  "scheduleStatusEnum": "SCHEDULED"
+}
+```
+
+**Consulta de agendamento de mensagem**
+
+GET http://localhost:9000/schedule/{id}
+
+Retorno
+
+```json
+{
+  "id": 1,
+  "sendTime": "2021-06-21T10:19:00",
+  "recipient": "abcd@gmail.com",
+  "messageService": "EMAIL",
+  "message": "mensagem de envio",
+  "scheduleStatusEnum": "SCHEDULED"
+}
+```
+
+**Cancelamento de agendamento de mensagem**
+
+DELETE http://localhost:9000/schedule/{id}
+
+Retorno 204
 
 ## Documentação dinâmica
 

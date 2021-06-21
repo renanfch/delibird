@@ -14,7 +14,7 @@ public class SearchScheduleUseCase {
 
     public ScheduleMessage getSheduleMessageById(final int id) {
         return scheduleRepository.findById(id)
-                .orElseThrow(()->new ScheduleNotFoundException(id));
+                .orElseThrow(() -> new ScheduleNotFoundException(id));
     }
 
 }

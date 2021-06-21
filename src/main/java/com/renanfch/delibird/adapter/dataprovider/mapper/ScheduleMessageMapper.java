@@ -10,7 +10,7 @@ public class ScheduleMessageMapper {
     private ScheduleMessageMapper() {
     }
 
-    public static ScheduleMessageEntity toEntityDb(final CreateSchedule scheduleMessage){
+    public static ScheduleMessageEntity toEntityDb(final CreateSchedule scheduleMessage) {
         return ScheduleMessageEntity.builder()
                 .sendTime(scheduleMessage.getSendTime())
                 .recipient(scheduleMessage.getRecipient().getValue())

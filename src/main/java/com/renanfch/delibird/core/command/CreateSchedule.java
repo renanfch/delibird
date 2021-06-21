@@ -27,7 +27,7 @@ public class CreateSchedule {
         this.messageService = messageService;
 
         Objects.requireNonNull(sendTime);
-        if(sendTime.isBefore(LocalDateTime.now()))
+        if (sendTime.isBefore(LocalDateTime.now()))
             throw new IllegalArgumentException("Cannot create schedule before current date!");
 
         Objects.requireNonNull(message);
