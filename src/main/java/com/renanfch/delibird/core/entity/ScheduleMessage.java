@@ -4,17 +4,15 @@ import com.renanfch.delibird.core.vo.MessageServiceEnum;
 import com.renanfch.delibird.core.vo.Recipient;
 import com.renanfch.delibird.core.vo.ScheduleStatusEnum;
 import lombok.Builder;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
-import lombok.ToString;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Getter
-@EqualsAndHashCode
-@ToString
-public class ScheduleMessage {
+public class ScheduleMessage implements Serializable {
+
     private final int id;
     private final LocalDateTime sendTime;
     private final Recipient recipient;

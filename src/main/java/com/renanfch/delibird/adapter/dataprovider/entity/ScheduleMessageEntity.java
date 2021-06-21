@@ -2,10 +2,7 @@ package com.renanfch.delibird.adapter.dataprovider.entity;
 
 import com.renanfch.delibird.core.vo.MessageServiceEnum;
 import com.renanfch.delibird.core.vo.ScheduleStatusEnum;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -16,6 +13,7 @@ import java.time.LocalDateTime;
 @Table(name = "schedule_message")
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode
 public class ScheduleMessageEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

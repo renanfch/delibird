@@ -19,7 +19,7 @@ public enum MessageServiceEnum {
         this.fun = fun;
     }
 
-    public void validade(final String recipient) {
+    public void validate(final String recipient) {
         fun.accept(recipient);
     }
 

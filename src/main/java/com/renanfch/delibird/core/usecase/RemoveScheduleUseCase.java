@@ -17,7 +17,7 @@ public class RemoveScheduleUseCase {
         final var schedule = scheduleRepository.findById(id)
                 .orElseThrow(() -> new ScheduleNotFoundException(id));
 
-        if (schedule.getScheduleStatusEnum() == ScheduleStatusEnum.CANCELED || schedule.getScheduleStatusEnum() == ScheduleStatusEnum.SENT)
+        if (schedule.getScheduleStatusEnum() == ScheduleStatusEnum.SENT)
             throw new ScheduleStateException(schedule);
 
         scheduleRepository.cancelSchedule(id);

@@ -2,8 +2,10 @@ package com.renanfch.delibird.core.vo;
 
 import lombok.Getter;
 
+import java.io.Serializable;
+
 @Getter
-public class Recipient {
+public class Recipient implements Serializable {
     private final String value;
 
     private Recipient(final String value) {
@@ -11,7 +13,7 @@ public class Recipient {
     }
 
     public static Recipient from(final String value, final MessageServiceEnum messageServiceEnum) {
-        messageServiceEnum.validade(value);
+        messageServiceEnum.validate(value);
 
         return new Recipient(value);
     }

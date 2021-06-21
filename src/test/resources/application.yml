@@ -1,17 +1,17 @@
 server:
-  port: 9000
+  port: 8080
 
 delibird:
   database:
-    url: ${DATABASE_URL:jdbc:h2:nio:./db/delibird_db;MODE=MySQL}
-    user: ${DATABASE_USER:root}
-    password: ${DATABASE_PASSWORD:123456}
+    url: jdbc:h2:nio:./db/delibird_db;MODE=MySQL
+    user: root
+    password: 123456
     driver: org.h2.Driver
 
 spring:
   h2:
     console:
-      enabled: true
+      enabled: false
   profiles:
     active: default
   flyway:
@@ -25,14 +25,3 @@ spring:
     host: ${RABBITMQ_HOST:localhost}
     username: ${RABBITMQ_USER:rabbitmqUser}
     password: ${RABBITMQ_PASSWORD:rabbitmqPass}
-
-management:
-  server:
-    port: 9000
-  endpoints:
-    web:
-      exposure:
-        include: health, prometheus
-  endpoint:
-    shutdown:
-      enabled: true

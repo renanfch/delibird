@@ -1,7 +1,7 @@
 package com.renanfch.delibird.adapter.entrypoint.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import lombok.Builder;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 import javax.validation.constraints.NotBlank;
@@ -9,7 +9,7 @@ import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 @Getter
-@Builder
+@AllArgsConstructor
 public class CreateScheduleDto {
     @NotNull
     @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm")
