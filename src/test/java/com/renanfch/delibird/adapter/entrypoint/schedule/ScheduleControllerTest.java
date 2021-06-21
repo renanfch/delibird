@@ -38,7 +38,7 @@ class ScheduleControllerTest {
 
     @Nested
     class register {
-/*
+
         @Test
         @DisplayName("Should register schedule with success")
         @SneakyThrows
@@ -53,7 +53,7 @@ class ScheduleControllerTest {
                     .body("messageService", equalTo("EMAIL"))
                     .body("message", equalTo("message"))
                     .body("scheduleStatusEnum", equalTo("SCHEDULED"));
-        }*/
+        }
 
         @Test
         @DisplayName("Should return 400 when argument email invalid")
