@@ -38,7 +38,7 @@ A estrutura do projeto foi desenvolvido pensando no conceito do
 
 **Registrar agendamento de mensagem**
 
-POST http://localhost:9000/schedule
+POST http://localhost:8080/schedule
 
 Body
 
@@ -66,7 +66,7 @@ Retorno:
 
 **Consulta de agendamento de mensagem**
 
-GET http://localhost:9000/schedule/{id}
+GET http://localhost:8080/schedule/{id}
 
 Retorno
 
@@ -83,7 +83,7 @@ Retorno
 
 **Cancelamento de agendamento de mensagem**
 
-DELETE http://localhost:9000/schedule/{id}
+DELETE http://localhost:8080/schedule/{id}
 
 Retorno 204
 
@@ -92,12 +92,12 @@ Retorno 204
 O `Swagger` nos proporciona uma documentação dinâmica para os end-points do projeto, também nos dando liberdade para
 efetuar execuções.
 
-Link: [http://localhost:9000/swagger-ui.html]
+Link: [http://localhost:8080/swagger-ui.html]
 
 ## Observabilidade
 
 ```Endpoint que fornece métricas no formato necessário para utilização em um servidor prometheus.
-http://localhost:9000/actuator/prometheus
+http://localhost:8080/actuator/prometheus
 ```
 
 ## Executando com Docker
