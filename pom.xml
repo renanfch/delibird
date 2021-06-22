@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.5.1</version>
+		<version>2.4.7</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.renanfch</groupId>
@@ -140,6 +140,7 @@
 					</execution>
 				</executions>
 				<configuration>
+					<mutationThreshold>100</mutationThreshold>
 					<targetClasses>
 						<param>com.renanfch.delibird.core*</param>
 					</targetClasses>
@@ -170,6 +171,32 @@
 						<goals>
 							<goal>report</goal>
 						</goals>
+					</execution>
+					<execution>
+						<id>jacoco-check</id>
+						<phase>test</phase>
+						<goals>
+							<goal>check</goal>
+						</goals>
+						<configuration>
+							<rules>
+								<rule>
+									<element>BUNDLE</element>
+									<limits>
+										<limit>
+											<counter>LINE</counter>
+											<value>COVEREDRATIO</value>
+											<minimum>1.0</minimum>
+										</limit>
+										<limit>
+											<counter>BRANCH</counter>
+											<value>COVEREDRATIO</value>
+											<minimum>1.0</minimum>
+										</limit>
+									</limits>
+								</rule>
+							</rules>
+						</configuration>
 					</execution>
 				</executions>
 			</plugin>

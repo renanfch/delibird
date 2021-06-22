@@ -26,8 +26,8 @@ public class Swagger {
     private ApiInfo apiInfo() {
         final var apiInfoBuilder = new ApiInfoBuilder();
 
-        apiInfoBuilder.title("Plataforma de Comunicação Delibird - Swagger API");
-        apiInfoBuilder.description("Documentação da API de acesso aos endpoints com Swagger");
+        apiInfoBuilder.title("Communication Platform Delibird - Swagger API");
+        apiInfoBuilder.description("Endpoint Access API Documentation with Swagger");
         apiInfoBuilder.version("1.0");
         apiInfoBuilder.licenseUrl("https://www.renanfch.com.br");
         apiInfoBuilder.contact(this.contact());

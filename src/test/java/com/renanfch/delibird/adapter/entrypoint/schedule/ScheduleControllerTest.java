@@ -1,9 +1,7 @@
 package com.renanfch.delibird.adapter.entrypoint.schedule;
 
 import io.restassured.RestAssured;
-import io.restassured.response.Response;
 import lombok.SneakyThrows;
-import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -31,9 +29,6 @@ class ScheduleControllerTest {
         RestAssured.baseURI = "http://localhost";
         RestAssured.port = port;
         RestAssured.basePath = "";
-
-        for (int i = 0; i <= 2; i++)
-            registerSchedule();
     }
 
     @Nested
@@ -43,9 +38,20 @@ class ScheduleControllerTest {
         @DisplayName("Should register schedule with success")
         @SneakyThrows
         void shouldRegisterScheduleWithSuccess() {
-            startRabbitMqContainer();
+            final var rabbitMQContainer = startRabbitMqContainer();
+            rabbitMQContainer.start();
 
-            registerSchedule()
+            RestAssured
+                    .given()
+                    .contentType(APPLICATION_JSON_VALUE)
+                    .body(new JSONObject()
+                            .put("sendTime", "2022-06-21T12:35:45.345")
+                            .put("recipient", "email@email.com")
+                            .put("messageService", "EMAIL")
+                            .put("message", "message")
+                            .toString())
+                    .when()
+                    .post("/schedule")
                     .then()
                     .statusCode(HttpStatus.OK.value())
                     .body("sendTime", equalTo("2022-06-21T12:35:45.345"))
@@ -90,7 +96,6 @@ class ScheduleControllerTest {
                     .then()
                     .statusCode(HttpStatus.OK.value())
                     .body("id", equalTo(1))
-                    .body("sendTime", equalTo("2022-06-21T12:35:45.345"))
                     .body("recipient", equalTo("email@email.com"))
                     .body("messageService", equalTo("EMAIL"))
                     .body("message", equalTo("message"))
@@ -140,29 +145,29 @@ class ScheduleControllerTest {
                     .statusCode(HttpStatus.NOT_FOUND.value());
         }
 
+        @Test
+        @DisplayName("Should return 404 when schedule is sent")
+        @SneakyThrows
+        void shouldReturn404WhenScheduleSent() {
+            RestAssured
+                    .given()
+                    .pathParam("id", 3)
+                    .when()
+                    .delete("/schedule/{id}")
+                    .then()
+                    .statusCode(HttpStatus.BAD_REQUEST.value());
+        }
+
     }
 
-    private Response registerSchedule() throws JSONException {
-        return RestAssured
-                .given()
-                .contentType(APPLICATION_JSON_VALUE)
-                .body(new JSONObject()
-                        .put("sendTime", "2022-06-21T12:35:45.345")
-                        .put("recipient", "email@email.com")
-                        .put("messageService", "EMAIL")
-                        .put("message", "message")
-                        .toString())
-                .when()
-                .post("/schedule");
-    }
-
-    private void startRabbitMqContainer(){
-        new RabbitMQContainer("rabbitmq:3-management")
+    private RabbitMQContainer startRabbitMqContainer() {
+        return new RabbitMQContainer("rabbitmq:3.7.4")
+                .withExposedPorts(5672)
                 .withNetwork(Network.newNetwork())
-                .withVhost("/")
-                .withUser("rabbitmqUser", "rabbitmqPass")
-                .waitingFor(Wait.forLogMessage(".*Server startup complete.*", 1))
-                .start();
+                .withVhost("delibird")
+                .withNetworkAliases("rabbitmq")
+                .withUser("guest", "guest")
+                .waitingFor(Wait.forListeningPort());
     }
 
 }

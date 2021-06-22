@@ -3,15 +3,26 @@ server:
 
 delibird:
   database:
-    url: ${DATABASE_URL:jdbc:h2:nio:./db/delibird_db;MODE=MySQL}
-    user: ${DATABASE_USER:root}
-    password: ${DATABASE_PASSWORD:123456}
+    url: jdbc:h2:mem:delibirddb;MODE=MySQL
+    user: root
+    password: 123456
     driver: org.h2.Driver
 
 spring:
+  datasource:
+    url: ${delibird.database.url}
+    username: ${delibird.database.user}
+    password: ${delibird.database.password}
+    driverClassName: org.h2.Driver
+  jpa:
+    defer-datasource-initialization: true
+    hibernate:
+      ddl-auto: none
+    database-platform: org.hibernate.dialect.H2Dialect
   h2:
     console:
       enabled: true
+      path: /h2
   profiles:
     active: default
   flyway:
@@ -22,9 +33,10 @@ spring:
     validate-on-migrate: false
     enabled: true
   rabbitmq:
-    host: ${RABBITMQ_HOST:localhost}
-    username: ${RABBITMQ_USER:rabbitmqUser}
-    password: ${RABBITMQ_PASSWORD:rabbitmqPass}
+    host: ${RABBITMQ_HOST:rabbitmq}
+    username: ${RABBITMQ_DEFAULT_USER:guest}
+    password: ${RABBITMQ_DEFAULT_PASS:guest}
+    virtual-host: "delibird"
 
 management:
   server:

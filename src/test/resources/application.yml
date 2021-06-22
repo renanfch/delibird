@@ -1,27 +1,19 @@
 server:
   port: 8080
 
-delibird:
-  database:
-    url: jdbc:h2:nio:./db/delibird_db;MODE=MySQL
-    user: root
-    password: 123456
-    driver: org.h2.Driver
-
 spring:
+  datasource:
+    url: jdbc:h2:mem:delibird_test_db;MODE=MySQL
+    username: root
+    password: 123456
+    driverClassName: org.h2.Driver
   h2:
     console:
       enabled: false
   profiles:
     active: default
-  flyway:
-    url: ${delibird.database.url}
-    user: ${delibird.database.user}
-    password: ${delibird.database.password}
-    baseline-on-migrate: true
-    validate-on-migrate: false
-    enabled: true
   rabbitmq:
-    host: ${RABBITMQ_HOST:localhost}
-    username: ${RABBITMQ_USER:rabbitmqUser}
-    password: ${RABBITMQ_PASSWORD:rabbitmqPass}
+    host: ${RABBITMQ_HOST:rabbitmq}
+    username: ${RABBITMQ_USER:guest}
+    password: ${RABBITMQ_PASSWORD:guest}
+    virtual-host: "delibird"

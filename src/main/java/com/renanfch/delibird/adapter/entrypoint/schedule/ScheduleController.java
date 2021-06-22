@@ -1,8 +1,8 @@
 package com.renanfch.delibird.adapter.entrypoint.schedule;
 
+import com.renanfch.delibird.adapter.entrypoint.dto.CreateScheduleDto;
 import com.renanfch.delibird.adapter.entrypoint.dto.ScheduleResponseDto;
 import com.renanfch.delibird.adapter.entrypoint.mapper.ScheduleMapper;
-import com.renanfch.delibird.adapter.entrypoint.dto.CreateScheduleDto;
 import com.renanfch.delibird.core.exception.ResponseError;
 import com.renanfch.delibird.core.usecase.RemoveScheduleUseCase;
 import com.renanfch.delibird.core.usecase.ScheduleMessageUseCase;
@@ -34,8 +34,8 @@ public class ScheduleController {
     @ApiOperation(value = "Message schedule record", response = ScheduleResponseDto.class, notes = "This operation records the message scheduling")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Success", response = ScheduleResponseDto.class),
-            @ApiResponse(code = 404, message = "Error 404", response = ResponseError.class),
-            @ApiResponse(code = 400, message = "Error 400", response = ResponseError.class)})
+            @ApiResponse(code = 404, message = "When it is not possible to create a schedule in the messageService", response = ResponseError.class),
+            @ApiResponse(code = 400, message = "When it is not possible to create a schedule in the state", response = ResponseError.class)})
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ScheduleResponseDto> register(@RequestBody @Valid final CreateScheduleDto createScheduleDto) {
         final var createSchedule = ScheduleMapper.toEntity(createScheduleDto);
@@ -49,11 +49,10 @@ public class ScheduleController {
     @ApiOperation(value = "Message scheduling search", response = ScheduleResponseDto.class, notes = "This operation searches the message schedule")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Success", response = ScheduleResponseDto.class),
-            @ApiResponse(code = 404, message = "Error 404", response = ResponseError.class),
-            @ApiResponse(code = 400, message = "Error 400", response = ResponseError.class)})
+            @ApiResponse(code = 404, message = "When schedule is not found", response = ResponseError.class)})
     @GetMapping("/{id}")
     public ResponseEntity<ScheduleResponseDto> searchById(@PathVariable final int id) {
-        final var scheduledMessage = searchScheduleUseCase.getSheduleMessageById(id);
+        final var scheduledMessage = searchScheduleUseCase.getScheduleMessageById(id);
         final var scheduleResponseDto = ScheduleMapper.toDtoResponse(scheduledMessage);
 
         return ResponseEntity.ok()
@@ -63,8 +62,8 @@ public class ScheduleController {
     @ApiOperation(value = "Cancels message scheduling", notes = "This operation cancels the message sending schedule")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Success"),
-            @ApiResponse(code = 404, message = "Error 404", response = ResponseError.class),
-            @ApiResponse(code = 400, message = "Error 400", response = ResponseError.class)})
+            @ApiResponse(code = 404, message = "When schedule is not found", response = ResponseError.class),
+            @ApiResponse(code = 400, message = "When it is not possible to delete a schedule because of state", response = ResponseError.class)})
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable final int id) {
         scheduleUseCase.cancel(id);

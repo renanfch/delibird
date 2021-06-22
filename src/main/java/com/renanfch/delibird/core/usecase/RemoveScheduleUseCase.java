@@ -1,9 +1,9 @@
 package com.renanfch.delibird.core.usecase;
 
 import com.renanfch.delibird.core.exception.ScheduleNotFoundException;
-import com.renanfch.delibird.core.vo.ScheduleStatusEnum;
 import com.renanfch.delibird.core.exception.ScheduleStateException;
 import com.renanfch.delibird.core.port.ScheduleRepository;
+import com.renanfch.delibird.core.vo.ScheduleStatusEnum;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

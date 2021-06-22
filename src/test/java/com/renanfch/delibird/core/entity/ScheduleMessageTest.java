@@ -14,7 +14,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThatExceptionOf
 class ScheduleMessageTest {
 
     @Test
-    @DisplayName("Should build ScheduleMessage when parameter valid")
+    @DisplayName("Should build ScheduleMessage when all parameter are valid")
     void shouldBuildScheduleMessageWhenParameterValid() {
         final var messageService = MessageServiceEnum.EMAIL;
         final var recipientValue = "email@email.com";

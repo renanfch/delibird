@@ -1,7 +1,5 @@
 package com.renanfch.delibird.adapter.dataprovider.entity;
 
-import com.renanfch.delibird.core.vo.MessageServiceEnum;
-import com.renanfch.delibird.core.vo.ScheduleStatusEnum;
 import lombok.*;
 
 import javax.persistence.*;
@@ -21,8 +19,6 @@ public class ScheduleMessageEntity {
     private LocalDateTime sendTime;
     private String recipient;
     private String message;
-    @Enumerated(EnumType.STRING)
-    private MessageServiceEnum messageService;
-    @Enumerated(EnumType.STRING)
-    private ScheduleStatusEnum scheduleStatusEnum;
+    private String messageService;
+    private String status;
 }

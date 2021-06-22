@@ -30,7 +30,7 @@ public class CreateSchedule {
             throw new IllegalArgumentException(CANNOT_CREATE_SCHEDULE_BEFORE_DATE);
 
         Objects.requireNonNull(message);
-        if (message.length() <= 0)
+        if (message.isEmpty())
             throw new IllegalArgumentException(CANNOT_CREATE_SCHEDULE_WITHOUT_MESSAGE);
 
     }

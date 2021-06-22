@@ -7,14 +7,15 @@ import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
 
-import static com.renanfch.delibird.core.command.CreateSchedule.*;
+import static com.renanfch.delibird.core.command.CreateSchedule.CANNOT_CREATE_SCHEDULE_BEFORE_DATE;
+import static com.renanfch.delibird.core.command.CreateSchedule.CANNOT_CREATE_SCHEDULE_WITHOUT_MESSAGE;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatExceptionOfType;
 
 class CreateScheduleTest {
 
     @Test
-    @DisplayName("Should build create schedule when parameter valid")
+    @DisplayName("Should build create schedule when all parameter are valid")
     void shouldBuildCreateScheduleWhenParameterValid() {
         final var messageService = MessageServiceEnum.EMAIL;
         final var recipientValue = "email@email.com";
@@ -34,7 +35,7 @@ class CreateScheduleTest {
     }
 
     @Test
-    @DisplayName("Should IllegalArgumentException when parameter invalid")
+    @DisplayName("Should IllegalArgumentException when parameter date before now")
     void shouldIllegalArgumentExceptionWhenParameterInvalid() {
         final var messageService = MessageServiceEnum.EMAIL;
         final var recipientValue = "email@email.com";

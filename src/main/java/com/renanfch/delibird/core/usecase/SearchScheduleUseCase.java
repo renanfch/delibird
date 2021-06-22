@@ -12,7 +12,7 @@ public class SearchScheduleUseCase {
 
     private final ScheduleRepository scheduleRepository;
 
-    public ScheduleMessage getSheduleMessageById(final int id) {
+    public ScheduleMessage getScheduleMessageById(final int id) {
         return scheduleRepository.findById(id)
                 .orElseThrow(() -> new ScheduleNotFoundException(id));
     }

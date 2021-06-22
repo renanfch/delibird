@@ -8,7 +8,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 class ResponseErrorTest {
 
     @Test
-    @DisplayName("Should return message")
+    @DisplayName("Should return message of ResponseError")
     void shouldReturnMessage() {
         final var msgError = "fail";
         final var responseError = new ResponseError(msgError);

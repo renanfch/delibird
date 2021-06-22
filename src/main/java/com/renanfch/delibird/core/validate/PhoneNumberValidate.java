@@ -1,11 +1,11 @@
 package com.renanfch.delibird.core.validate;
 
-public class PhoneNumber {
+import lombok.experimental.UtilityClass;
+
+@UtilityClass
+public class PhoneNumberValidate {
 
     static final String PHONE_FORMAT_INCORRECT = "PhoneNumber: %s format incorrect";
-
-    private PhoneNumber() {
-    }
 
     public static void validate(final String value) {
         if (value.length() < 10 || value.length() > 12)
