@@ -1,11 +1,10 @@
 # Delibird
+API para agendamento de mensagens com serviços como email, sms, whatsapp;
 
 <p align="center">
-    <img src="documentation/delibird.png" width="450" >
+    <img src="documentation/delibird.png" width="350" >
 </p>
 
-
-API para agendamento de mensagens com serviços como email, sms, whatsapp;
 
 Stack utilizada:
 
