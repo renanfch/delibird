@@ -1,3 +1,7 @@
+<p align="center">
+    <img src="documentation/delibird.png" width="450" >
+</p>
+
 # Delibird
 
 API para agendamento de mensagens com serviços como email, sms, whatsapp;
@@ -8,6 +12,7 @@ Stack utilizada:
 * Compilação: [`Maven`](https://maven.apache.org/)
 * Framework: [`Spring Boot`](https://spring.io/projects/spring-boot)
 * Banco de dados: [`H2`](h2database.com) / [`Flyway`](https://flywaydb.org)
+* AMQP: [`RabbitMQ`](https://www.rabbitmq.com/)  
 * Documentação: [`Swagger`](https://swagger.io)
 * Tests:
     * Teste de unidade [`jUnit5`](https://junit.org/junit5/docs/current/user-guide/)
