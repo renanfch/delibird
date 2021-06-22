@@ -12,8 +12,8 @@ public class Recipient implements Serializable {
         this.value = value;
     }
 
-    public static Recipient from(final String value, final MessageServiceEnum messageServiceEnum) {
-        messageServiceEnum.validate(value);
+    public static Recipient from(final String value, final MessageService messageService) {
+        messageService.validate(value);
 
         return new Recipient(value);
     }

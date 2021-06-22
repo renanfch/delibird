@@ -60,7 +60,7 @@ Retorno:
   "recipient": "abcd@gmail.com",
   "messageService": "EMAIL",
   "message": "mensagem de envio",
-  "scheduleStatusEnum": "SCHEDULED"
+  "scheduleStatus": "SCHEDULED"
 }
 ```
 
@@ -77,7 +77,7 @@ Retorno
   "recipient": "abcd@gmail.com",
   "messageService": "EMAIL",
   "message": "mensagem de envio",
-  "scheduleStatusEnum": "SCHEDULED"
+  "scheduleStatus": "SCHEDULED"
 }
 ```
 

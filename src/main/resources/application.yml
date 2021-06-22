@@ -1,5 +1,5 @@
 server:
-  port: 9000
+  port: 8080
 
 delibird:
   database:
@@ -33,14 +33,13 @@ spring:
     validate-on-migrate: false
     enabled: true
   rabbitmq:
-    host: ${RABBITMQ_HOST:rabbitmq}
-    username: ${RABBITMQ_DEFAULT_USER:guest}
-    password: ${RABBITMQ_DEFAULT_PASS:guest}
-    virtual-host: "delibird"
+    host: ${RABBITMQ_HOST:localhost}
+    username: ${RABBITMQ_DEFAULT_USER:rabbitmqUser}
+    password: ${RABBITMQ_DEFAULT_PASS:rabbitmqPass}
 
 management:
   server:
-    port: 9000
+    port: 8080
   endpoints:
     web:
       exposure:

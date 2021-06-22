@@ -3,9 +3,9 @@ package com.renanfch.delibird.adapter.dataprovider.schedule;
 import com.renanfch.delibird.adapter.dataprovider.entity.ScheduleMessageEntity;
 import com.renanfch.delibird.adapter.dataprovider.mapper.ScheduleMessageMapper;
 import com.renanfch.delibird.core.command.CreateSchedule;
-import com.renanfch.delibird.core.vo.MessageServiceEnum;
+import com.renanfch.delibird.core.vo.MessageService;
 import com.renanfch.delibird.core.vo.Recipient;
-import com.renanfch.delibird.core.vo.ScheduleStatusEnum;
+import com.renanfch.delibird.core.vo.ScheduleStatus;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -41,8 +41,8 @@ class ScheduleMessageRepositoryTest {
                 .recipient(email)
                 .id(id)
                 .sendTime(LocalDateTime.MAX)
-                .status(ScheduleStatusEnum.SCHEDULED.toString())
-                .messageService(MessageServiceEnum.EMAIL.toString())
+                .status(ScheduleStatus.SCHEDULED.toString())
+                .messageService(MessageService.EMAIL.toString())
                 .build();
 
         when(repository.findById(id)).thenReturn(Optional.of(scheduleMessageEntity));
@@ -65,9 +65,9 @@ class ScheduleMessageRepositoryTest {
         final var scheduleMessageCreate = CreateSchedule
                 .builder()
                 .message(message)
-                .recipient(Recipient.from(email, MessageServiceEnum.EMAIL))
+                .recipient(Recipient.from(email, MessageService.EMAIL))
                 .sendTime(LocalDateTime.MAX)
-                .messageService(MessageServiceEnum.EMAIL)
+                .messageService(MessageService.EMAIL)
                 .build();
 
         final var scheduleMessageEntity = ScheduleMessageEntity
@@ -76,8 +76,8 @@ class ScheduleMessageRepositoryTest {
                 .message(message)
                 .recipient(email)
                 .sendTime(LocalDateTime.MAX)
-                .status(ScheduleStatusEnum.SCHEDULED.toString())
-                .messageService(MessageServiceEnum.EMAIL.toString())
+                .status(ScheduleStatus.SCHEDULED.toString())
+                .messageService(MessageService.EMAIL.toString())
                 .build();
 
         when(repository.save(ScheduleMessageMapper.toEntityDb(scheduleMessageCreate)))
@@ -88,12 +88,12 @@ class ScheduleMessageRepositoryTest {
         assertThat(schedule.getId()).isEqualTo(id);
         assertThat(schedule.getMessage()).isEqualTo(message);
         assertThat(schedule.getSendTime()).isEqualTo(LocalDateTime.MAX);
-        assertThat(schedule.getMessageService()).isEqualTo(MessageServiceEnum.EMAIL);
+        assertThat(schedule.getMessageService()).isEqualTo(MessageService.EMAIL);
     }
 
     @Test
-    @DisplayName("Should delele register in repository when cancel schedule")
-    void shouldDeleleRegisterWhenCancelSchedule() {
+    @DisplayName("Should delete register in repository when cancel schedule")
+    void shouldDeleteRegisterWhenCancelSchedule() {
         final var id = 1;
 
         scheduleMessageRepository.cancelSchedule(id);

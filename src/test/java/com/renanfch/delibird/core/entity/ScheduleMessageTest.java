@@ -1,8 +1,8 @@
 package com.renanfch.delibird.core.entity;
 
-import com.renanfch.delibird.core.vo.MessageServiceEnum;
+import com.renanfch.delibird.core.vo.MessageService;
 import com.renanfch.delibird.core.vo.Recipient;
-import com.renanfch.delibird.core.vo.ScheduleStatusEnum;
+import com.renanfch.delibird.core.vo.ScheduleStatus;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -16,7 +16,7 @@ class ScheduleMessageTest {
     @Test
     @DisplayName("Should build ScheduleMessage when all parameter are valid")
     void shouldBuildScheduleMessageWhenParameterValid() {
-        final var messageService = MessageServiceEnum.EMAIL;
+        final var messageService = MessageService.EMAIL;
         final var recipientValue = "email@email.com";
         final var message = "message";
         final var id = 1;
@@ -26,7 +26,7 @@ class ScheduleMessageTest {
                 .recipient(Recipient.from(recipientValue, messageService))
                 .message(message)
                 .messageService(messageService)
-                .scheduleStatusEnum(ScheduleStatusEnum.SCHEDULED)
+                .scheduleStatus(ScheduleStatus.SCHEDULED)
                 .id(id)
                 .build();
 
@@ -34,14 +34,14 @@ class ScheduleMessageTest {
         assertThat(scheduleMessage.getRecipient().getValue()).isEqualTo(Recipient.from(recipientValue, messageService).getValue());
         assertThat(scheduleMessage.getMessage()).isEqualTo(message);
         assertThat(scheduleMessage.getMessageService()).isEqualTo(messageService);
-        assertThat(scheduleMessage.getScheduleStatusEnum()).isEqualTo(ScheduleStatusEnum.SCHEDULED);
+        assertThat(scheduleMessage.getScheduleStatus()).isEqualTo(ScheduleStatus.SCHEDULED);
         assertThat(scheduleMessage.getId()).isEqualTo(id);
     }
 
     @Test
     @DisplayName("Should IllegalArgumentException when message is null")
     void shouldIllegalArgumentExceptionWhenMessageNull() {
-        final var messageService = MessageServiceEnum.EMAIL;
+        final var messageService = MessageService.EMAIL;
         final var recipientValue = "email@email.com";
 
         final var scheduleMessage = ScheduleMessage.builder()
@@ -54,9 +54,9 @@ class ScheduleMessageTest {
     }
 
     @Test
-    @DisplayName("Should IllegalArgumentException when sendtime is null")
+    @DisplayName("Should IllegalArgumentException when send time is null")
     void shouldIllegalArgumentExceptionWhenSendTimeNull() {
-        final var messageService = MessageServiceEnum.EMAIL;
+        final var messageService = MessageService.EMAIL;
         final var recipientValue = "email@email.com";
         final var message = "message";
 

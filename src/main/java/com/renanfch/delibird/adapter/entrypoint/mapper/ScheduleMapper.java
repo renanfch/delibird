@@ -4,7 +4,7 @@ import com.renanfch.delibird.adapter.entrypoint.dto.CreateScheduleDto;
 import com.renanfch.delibird.adapter.entrypoint.dto.ScheduleResponseDto;
 import com.renanfch.delibird.core.command.CreateSchedule;
 import com.renanfch.delibird.core.entity.ScheduleMessage;
-import com.renanfch.delibird.core.vo.MessageServiceEnum;
+import com.renanfch.delibird.core.vo.MessageService;
 import com.renanfch.delibird.core.vo.Recipient;
 
 public class ScheduleMapper {
@@ -12,7 +12,7 @@ public class ScheduleMapper {
     }
 
     public static CreateSchedule toEntity(final CreateScheduleDto scheduleRegisterDto) {
-        final var msgService = MessageServiceEnum.from(scheduleRegisterDto.getMessageService());
+        final var msgService = MessageService.from(scheduleRegisterDto.getMessageService());
         final var recipient = Recipient.from(scheduleRegisterDto.getRecipient(), msgService);
 
         return CreateSchedule.builder()
@@ -30,7 +30,7 @@ public class ScheduleMapper {
                 .recipient(scheduleMessage.getRecipient().getValue())
                 .messageService(scheduleMessage.getMessageService().toString())
                 .message(scheduleMessage.getMessage())
-                .scheduleStatusEnum(scheduleMessage.getScheduleStatusEnum().toString())
+                .scheduleStatusEnum(scheduleMessage.getScheduleStatus().toString())
                 .build();
     }
 }

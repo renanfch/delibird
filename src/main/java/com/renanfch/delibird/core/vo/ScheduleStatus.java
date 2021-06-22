@@ -4,13 +4,13 @@ import com.renanfch.delibird.core.exception.ScheduleStatusNotFoundException;
 
 import java.util.Arrays;
 
-public enum ScheduleStatusEnum {
+public enum ScheduleStatus {
     SCHEDULED,
     SENT,
     ERROR;
 
-    public static ScheduleStatusEnum from(final String value) {
-        return Arrays.stream(ScheduleStatusEnum.values())
+    public static ScheduleStatus from(final String value) {
+        return Arrays.stream(ScheduleStatus.values())
                 .filter(it -> it.name().equalsIgnoreCase(value))
                 .findFirst()
                 .orElseThrow(() -> new ScheduleStatusNotFoundException(value));

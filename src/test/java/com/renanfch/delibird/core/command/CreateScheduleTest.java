@@ -1,6 +1,6 @@
 package com.renanfch.delibird.core.command;
 
-import com.renanfch.delibird.core.vo.MessageServiceEnum;
+import com.renanfch.delibird.core.vo.MessageService;
 import com.renanfch.delibird.core.vo.Recipient;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -17,7 +17,7 @@ class CreateScheduleTest {
     @Test
     @DisplayName("Should build create schedule when all parameter are valid")
     void shouldBuildCreateScheduleWhenParameterValid() {
-        final var messageService = MessageServiceEnum.EMAIL;
+        final var messageService = MessageService.EMAIL;
         final var recipientValue = "email@email.com";
         final var message = "message";
 
@@ -37,7 +37,7 @@ class CreateScheduleTest {
     @Test
     @DisplayName("Should IllegalArgumentException when parameter date before now")
     void shouldIllegalArgumentExceptionWhenParameterInvalid() {
-        final var messageService = MessageServiceEnum.EMAIL;
+        final var messageService = MessageService.EMAIL;
         final var recipientValue = "email@email.com";
         final var message = "message";
 
@@ -55,7 +55,7 @@ class CreateScheduleTest {
     @Test
     @DisplayName("Should IllegalArgumentException when email is null")
     void shouldIllegalArgumentExceptionWhenMessageNull() {
-        final var messageService = MessageServiceEnum.EMAIL;
+        final var messageService = MessageService.EMAIL;
         final var recipientValue = "email@email.com";
 
         final var createSchedule = CreateSchedule.builder()
@@ -68,9 +68,9 @@ class CreateScheduleTest {
     }
 
     @Test
-    @DisplayName("Should IllegalArgumentException when sendtime is null")
+    @DisplayName("Should IllegalArgumentException when send time is null")
     void shouldIllegalArgumentExceptionWhenSendTimeNull() {
-        final var messageService = MessageServiceEnum.EMAIL;
+        final var messageService = MessageService.EMAIL;
         final var recipientValue = "email@email.com";
         final var message = "message";
 
@@ -84,9 +84,9 @@ class CreateScheduleTest {
     }
 
     @Test
-    @DisplayName("Should IllegalArgumentException when mesage is empty")
+    @DisplayName("Should IllegalArgumentException when message is empty")
     void shouldIllegalArgumentExceptionWhenMessageIsEmpty() {
-        final var messageService = MessageServiceEnum.EMAIL;
+        final var messageService = MessageService.EMAIL;
         final var recipientValue = "email@email.com";
         final var message = "";
 

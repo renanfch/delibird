@@ -15,7 +15,7 @@ class RecipientTest {
     void shouldReturnEmailValueWhenEmailIsValid() {
         final var email = "email@email.com";
 
-        final var recipient = Recipient.from(email, MessageServiceEnum.EMAIL);
+        final var recipient = Recipient.from(email, MessageService.EMAIL);
         assertThat(recipient.getValue()).isEqualTo(email);
     }
 
@@ -25,7 +25,7 @@ class RecipientTest {
         final var email = "email";
 
         assertThatExceptionOfType(IllegalArgumentException.class)
-                .isThrownBy(() -> Recipient.from(email, MessageServiceEnum.EMAIL))
+                .isThrownBy(() -> Recipient.from(email, MessageService.EMAIL))
                 .withMessage("Email: email format incorrect");
     }
 
@@ -34,7 +34,7 @@ class RecipientTest {
     void shouldReturnPhoneNumberValueWhenPhoneNumberIsValidToSms() {
         final var phone = "1699887766";
 
-        final var recipient = Recipient.from(phone, MessageServiceEnum.SMS);
+        final var recipient = Recipient.from(phone, MessageService.SMS);
         assertThat(recipient.getValue()).isEqualTo(phone);
     }
 
@@ -43,7 +43,7 @@ class RecipientTest {
     @DisplayName("Should throw IllegalArgumentException when phone number invalid")
     void shouldThrowIllegalArgumentExceptionWhenPhoneNumberInvalid(String value) {
         assertThatExceptionOfType(IllegalArgumentException.class)
-                .isThrownBy(() -> Recipient.from(value, MessageServiceEnum.SMS))
+                .isThrownBy(() -> Recipient.from(value, MessageService.SMS))
                 .withMessage("PhoneNumber: " + value + " format incorrect");
     }
 
@@ -51,7 +51,7 @@ class RecipientTest {
     @CsvSource({"1699887766", "16998877661", "169988776612"})
     @DisplayName("Should return phone number value when phone number is valid to whatsapp")
     void shouldReturnPhoneNumberValueWhenPhoneNumberIsValidToWhatsApp(String value) {
-        final var recipient = Recipient.from(value, MessageServiceEnum.WHATSAPP);
+        final var recipient = Recipient.from(value, MessageService.WHATSAPP);
         assertThat(recipient.getValue()).isEqualTo(value);
     }
 

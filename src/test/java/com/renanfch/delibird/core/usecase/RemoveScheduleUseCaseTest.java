@@ -4,7 +4,7 @@ import com.renanfch.delibird.core.entity.ScheduleMessage;
 import com.renanfch.delibird.core.exception.ScheduleNotFoundException;
 import com.renanfch.delibird.core.exception.ScheduleStateException;
 import com.renanfch.delibird.core.port.ScheduleRepository;
-import com.renanfch.delibird.core.vo.ScheduleStatusEnum;
+import com.renanfch.delibird.core.vo.ScheduleStatus;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -32,7 +32,7 @@ class RemoveScheduleUseCaseTest {
         final var id = 1;
         final var scheduleMessage = mock(ScheduleMessage.class);
 
-        when(scheduleMessage.getScheduleStatusEnum()).thenReturn(ScheduleStatusEnum.SCHEDULED);
+        when(scheduleMessage.getScheduleStatus()).thenReturn(ScheduleStatus.SCHEDULED);
         when(repository.findById(id)).thenReturn(Optional.of(scheduleMessage));
 
         removeScheduleUseCase.cancel(id);
@@ -49,7 +49,7 @@ class RemoveScheduleUseCaseTest {
 
         assertThatExceptionOfType(ScheduleNotFoundException.class)
                 .isThrownBy(() -> removeScheduleUseCase.cancel(id))
-                .withMessage("SchuduleId 1 not found");
+                .withMessage("ScheduleId 1 not found");
     }
 
     @Test
@@ -58,12 +58,12 @@ class RemoveScheduleUseCaseTest {
         final var id = 0;
         final var scheduleMessage = mock(ScheduleMessage.class);
 
-        when(scheduleMessage.getScheduleStatusEnum()).thenReturn(ScheduleStatusEnum.SENT);
+        when(scheduleMessage.getScheduleStatus()).thenReturn(ScheduleStatus.SENT);
         when(repository.findById(id)).thenReturn(Optional.of(scheduleMessage));
 
         assertThatExceptionOfType(ScheduleStateException.class)
                 .isThrownBy(() -> removeScheduleUseCase.cancel(id))
-                .withMessage("Not possible remove schuduleId 0 with status SENT");
+                .withMessage("Not possible remove scheduleId 0 with status SENT");
     }
 
 }

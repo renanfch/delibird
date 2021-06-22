@@ -7,19 +7,19 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatExceptionOfType;
 
-class ScheduleStatusEnumTest {
+class ScheduleStatusTest {
     @Test
     @DisplayName("Should return scheduledEnum when from scheduled")
     void shouldReturnScheduledEnumWhenFromScheduled() {
-        final var scheduleStatusEnum = ScheduleStatusEnum.from("SCHEDULED");
-        assertThat(scheduleStatusEnum).isEqualTo(ScheduleStatusEnum.SCHEDULED);
+        final var scheduleStatusEnum = ScheduleStatus.from("SCHEDULED");
+        assertThat(scheduleStatusEnum).isEqualTo(ScheduleStatus.SCHEDULED);
     }
 
     @Test
     @DisplayName("Should ScheduleStatusNotFoundException when status not found")
     void shouldScheduleStatusNotFoundExceptionWhenNotFound() {
         assertThatExceptionOfType(ScheduleStatusNotFoundException.class)
-                .isThrownBy(() -> ScheduleStatusEnum.from("abc"))
-                .withMessage("SchuduleStatus abc not found");
+                .isThrownBy(() -> ScheduleStatus.from("abc"))
+                .withMessage("ScheduleStatus abc not found");
     }
 }

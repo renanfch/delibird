@@ -26,8 +26,8 @@ class SearchScheduleUseCaseTest {
     private SearchScheduleUseCase searchScheduleUseCase;
 
     @Test
-    @DisplayName("Should return shedule message when find in repository")
-    void shouldReturnSheduleMessageWhenFind() {
+    @DisplayName("Should return schedule message when find in repository")
+    void shouldReturnScheduleMessageWhenFind() {
         final var id = 1;
         final var scheduleMessage = mock(ScheduleMessage.class);
 
@@ -48,7 +48,7 @@ class SearchScheduleUseCaseTest {
 
         assertThatExceptionOfType(ScheduleNotFoundException.class)
                 .isThrownBy(() -> searchScheduleUseCase.getScheduleMessageById(id))
-                .withMessage("SchuduleId 1 not found");
+                .withMessage("ScheduleId 1 not found");
     }
 
 }

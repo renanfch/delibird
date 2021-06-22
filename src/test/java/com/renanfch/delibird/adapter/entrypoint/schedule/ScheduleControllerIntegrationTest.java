@@ -10,15 +10,14 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
-import org.testcontainers.containers.Network;
-import org.testcontainers.containers.RabbitMQContainer;
-import org.testcontainers.containers.wait.strategy.Wait;
+import org.springframework.test.context.ContextConfiguration;
 
 import static org.hamcrest.Matchers.equalTo;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-class ScheduleControllerTest {
+@ContextConfiguration(initializers = RabbitMqContextInitializer.class)
+class ScheduleControllerIntegrationTest {
 
     @LocalServerPort
     private int port;
@@ -38,9 +37,6 @@ class ScheduleControllerTest {
         @DisplayName("Should register schedule with success")
         @SneakyThrows
         void shouldRegisterScheduleWithSuccess() {
-            final var rabbitMQContainer = startRabbitMqContainer();
-            rabbitMQContainer.start();
-
             RestAssured
                     .given()
                     .contentType(APPLICATION_JSON_VALUE)
@@ -54,7 +50,7 @@ class ScheduleControllerTest {
                     .post("/schedule")
                     .then()
                     .statusCode(HttpStatus.OK.value())
-                    .body("sendTime", equalTo("2022-06-21T12:35:45.345"))
+                    .body("sendTime", equalTo("2022-06-21T12:35"))
                     .body("recipient", equalTo("email@email.com"))
                     .body("messageService", equalTo("EMAIL"))
                     .body("message", equalTo("message"))
@@ -158,16 +154,6 @@ class ScheduleControllerTest {
                     .statusCode(HttpStatus.BAD_REQUEST.value());
         }
 
-    }
-
-    private RabbitMQContainer startRabbitMqContainer() {
-        return new RabbitMQContainer("rabbitmq:3.7.4")
-                .withExposedPorts(5672)
-                .withNetwork(Network.newNetwork())
-                .withVhost("delibird")
-                .withNetworkAliases("rabbitmq")
-                .withUser("guest", "guest")
-                .waitingFor(Wait.forListeningPort());
     }
 
 }

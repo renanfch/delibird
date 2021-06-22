@@ -7,7 +7,7 @@ import com.renanfch.delibird.core.validate.PhoneNumberValidate;
 import java.util.Arrays;
 import java.util.function.Consumer;
 
-public enum MessageServiceEnum {
+public enum MessageService {
     EMAIL(EmailValidate::validate),
     SMS(PhoneNumberValidate::validate),
     PUSH(EmailValidate::validate),
@@ -15,7 +15,7 @@ public enum MessageServiceEnum {
 
     private final Consumer<String> fun;
 
-    MessageServiceEnum(final Consumer<String> fun) {
+    MessageService(final Consumer<String> fun) {
         this.fun = fun;
     }
 
@@ -23,8 +23,8 @@ public enum MessageServiceEnum {
         fun.accept(recipient);
     }
 
-    public static MessageServiceEnum from(final String value) {
-        return Arrays.stream(MessageServiceEnum.values())
+    public static MessageService from(final String value) {
+        return Arrays.stream(MessageService.values())
                 .filter(it -> it.name().equalsIgnoreCase(value))
                 .findFirst()
                 .orElseThrow(() -> new MessageServiceNotFoundException(value));

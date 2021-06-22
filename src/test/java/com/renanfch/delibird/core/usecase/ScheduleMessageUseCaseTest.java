@@ -4,7 +4,7 @@ import com.renanfch.delibird.core.command.CreateSchedule;
 import com.renanfch.delibird.core.entity.ScheduleMessage;
 import com.renanfch.delibird.core.port.ScheduleNotifier;
 import com.renanfch.delibird.core.port.ScheduleRepository;
-import com.renanfch.delibird.core.vo.MessageServiceEnum;
+import com.renanfch.delibird.core.vo.MessageService;
 import com.renanfch.delibird.core.vo.Recipient;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -37,9 +37,9 @@ class ScheduleMessageUseCaseTest {
 
         final var createSchedule = CreateSchedule.builder()
                 .message(message)
-                .messageService(MessageServiceEnum.EMAIL)
+                .messageService(MessageService.EMAIL)
                 .sendTime(LocalDateTime.MAX)
-                .recipient(Recipient.from("email@email.com", MessageServiceEnum.EMAIL))
+                .recipient(Recipient.from("email@email.com", MessageService.EMAIL))
                 .build();
 
         when(scheduleMessage.getMessage()).thenReturn(message);

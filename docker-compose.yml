@@ -11,7 +11,7 @@ services:
     networks:
       - delibird-network
     environment:
-      RABBITMQ_HOST: rabbitmq
+      RABBITMQ_HOST: localhost
       RABBITMQ_DEFAULT_USER: rabbitmqUser
       RABBITMQ_DEFAULT_PASS: rabbitmqPass
 
@@ -24,9 +24,12 @@ services:
     networks:
       - delibird-network
     environment:
-      DATABASE_URL: jdbc:h2:mem:delibirddb;MODE=MySQL
-      DATABASE_USER: root
-      DATABASE_PASSWORD: 123456
+      DELIBIRD_DATABASE_URL: jdbc:h2:mem:delibirddb;MODE=MySQL
+      DELIBIRD_DATABASE_USER: root
+      DELIBIRD_DATABASE_PASSWORD: 123456
+      RABBITMQ_HOST: localhost
+      RABBITMQ_DEFAULT_USER: rabbitmqUser
+      RABBITMQ_DEFAULT_PASS: rabbitmqPass
 
 networks:
   delibird-network:
