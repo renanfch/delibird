@@ -1,10 +1,11 @@
-# Delibird
-API para agendamento de mensagens com serviços como email, sms, whatsapp;
+> Delibird, o Pokémon Entrega, é um Pokémon dos tipos Ice/Flying.
 
 <p align="center">
-    <img src="documentation/delibird.png" width="350" >
+    <img src="documentation/delibird.png" width="200" >
 </p>
 
+# Delibird  [![CircleCI](https://circleci.com/gh/renanfch/delibird.svg?style=svg)](https://circleci.com/gh/renanfch/delibird)
+API para agendamento de mensagens com serviços como email, sms, whatsapp;
 
 Stack utilizada:
 
